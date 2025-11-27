@@ -1,13 +1,3 @@
-// import express from "express";
-// import { submitContact } from "../controllers/contactcontroller.js";
-
-// const router = express.Router();
-
-// router.get("/", (req, res) => res.send("Contact Route"));
-
-// router.route("/").post(submitContact);
-
-// export default router;
 
 import express from "express";
 import Contact from "../models/contact.js";
