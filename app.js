@@ -34,6 +34,12 @@ connectDB();
 // Routes
 // Tumhara frontend fetch URL ke liye correct route ye hai:
 // POST http://localhost:5000/api/contact
+
+app.use(
+    cors({
+        "origin": ["http://localhost:5000", "https://nest-solution.vercel.app/"],
+    })
+)
 app.use("/api/contact", contactRoutes);
 
 // Start Server
