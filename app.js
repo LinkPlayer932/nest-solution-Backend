@@ -1,48 +1,25 @@
-// import express from "express";
-// import dotenv from "dotenv";
-// import connectDB from "./config/db.js";
-
-// dotenv.config();
-
-// const app = express();
-// const PORT = process.env.PORT || 5000;
-
-// connectDB().then(async()=>{
-//     console.log("Connected to DB");
-// });
-
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
 import express from "express";
-import dotenv from "dotenv";
-import connectDB from "./config/db.js";
-import contactRoutes from "./route/contactroutes.js";
 import cors from "cors";
+import dotenv from "dotenv";
+import connectDB from "./src/config/db.js";
+import contactRoute from "./src/routes/contact.js";
 
 dotenv.config();
 
 const app = express();
 
-// Middlewares
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// Connect Database
+// CONNECT DB
 connectDB();
 
-// Routes
-// Tumhara frontend fetch URL ke liye correct route ye hai:
-// POST http://localhost:5000/api/contact
+// ROUTES
+app.use("/api/contact", contactRoute);
 
-app.use(
-    cors({
-        "origin": ["http://localhost:5000", "https://nest-solution.vercel.app/"],
-    })
-)
-app.use("/api/contact", contactRoutes);
+// SERVER
+app.listen(5000, () => {
+  console.log("🚀 Backend running on port 5000");
+});
 
-// Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+export default app;
