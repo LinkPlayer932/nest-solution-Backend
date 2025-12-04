@@ -2,24 +2,20 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./src/config/db.js";
-import contactRoute from "./src/routes/contact.js";
+
+import articleRoutes from "./src/routes/articles.js";
+import contactRoutes from "./src/routes/contact.js";
 
 dotenv.config();
+connectDB();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// CONNECT DB
-connectDB();
+app.use("/api/articles", articleRoutes);
+app.use("/api/contact", contactRoutes);
 
-// ROUTES
-app.use("/api/contact", contactRoute);
-
-// SERVER
-app.listen(5000, () => {
-  console.log("🚀 Backend running on port 5000");
-});
-
-export default app;
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
